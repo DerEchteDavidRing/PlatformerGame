@@ -16,7 +16,7 @@ public class SnowballFight extends GraphicsApp implements GameConfig, Assets {
 
     @Override
     public void initialize() {
-
+        //Background.setImageSize();
 
 
 
@@ -40,6 +40,7 @@ public class SnowballFight extends GraphicsApp implements GameConfig, Assets {
         }
 
         Objects.drawObjects();
+        Player.animatePlayer();
         Player.movePlayer();
         Player.drawPlayer();
 

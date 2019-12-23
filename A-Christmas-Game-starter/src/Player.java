@@ -1,32 +1,54 @@
 import config.Assets;
 import config.GameConfig;
 import de.ur.mi.oop.colors.Colors;
+import de.ur.mi.oop.graphics.Image;
 import de.ur.mi.oop.graphics.Rectangle;
 
 import javax.xml.xpath.XPath;
 import java.util.jar.JarEntry;
 
 public class Player implements GameConfig, Assets {
-    //Image playerModel = new Image(0,0,"data\santa\santa_jumping_1");
-    //static Rectangle rechteck = new Rectangle(200,SCREEN_HEIGHT-100,100,100, Colors.RED);
+    
+    static Image playerImage = new Image(100,20,getPlayerAnimation());
+    public static void animatePlayer(){
+        playerImage = new Image(playerImage.getXPos(),playerImage.getYPos(),getPlayerAnimation());
+    }
 
-    static Rectangle rechteck = new Rectangle(100,20,PLAYERWIDTH,50, Colors.RED);
+    public static int temp = 0;
+    public static int temp2 = 0;
+    public static String getPlayerAnimation(){
+        System.out.println(temp);
 
+        if (hitdetection==1){
+        temp++;
+        if (temp>3){
+            temp = 0;
+            temp2++;
+        }
+        if (temp2>9) {
+            temp2 = 0;
+        }
+        }
+
+
+
+        return PLAYER_SPRITES_RUNNING[temp2];
+    }
 
     public static int hitdetection = 0;
     public static void playerCollissionWithObject(){
         //1 = hit
-        if (Objects.checkCollision(rechteck)==1){
+        if (Objects.checkCollision(playerImage)==1){
             hitdetection = 1;
         }
-        if (Objects.checkCollision(rechteck)==0){
+        if (Objects.checkCollision(playerImage)==0){
             hitdetection = 0;
         }
     }
 
 
 
-    public static Rectangle[] Hindernis = new Rectangle[ChangeMap.getObject_Amount()];
+    public static Image[] Hindernis = new Image[ChangeMap.getObject_Amount()];
 
     public static void setHindernis(){
         for (int i = 0; i< ChangeMap.getObject_Amount();i++){
@@ -35,12 +57,12 @@ public class Player implements GameConfig, Assets {
     }
 
     public static void drawPlayer(){
-        rechteck.draw();
+        playerImage.draw();
     }
     public static int jumpHeight = 20;
     public static boolean right;
     public static boolean left;
-    public static boolean up=true;
+    public static boolean up;
     public static boolean down;
     public static int XSPEED = 0;
     public static int YSPEED = 0;
@@ -107,8 +129,8 @@ public class Player implements GameConfig, Assets {
 
         if (hitdetection==0){
             Background.move(XSPEED);
-            rechteck.move(XSPEED,YSPEED);
-            rechteck.move(0, GRAVITY);
+            playerImage.move(XSPEED,YSPEED);
+            playerImage.move(0, GRAVITY);
         }
     }
 
@@ -120,7 +142,7 @@ public class Player implements GameConfig, Assets {
     public static void jump(){
         if (jumpTemp>0) {
             tempIamSorryForThis = 0;
-            rechteck.move(0,-jumpTemp-5);
+            playerImage.move(0,-jumpTemp-5);
             jumpTemp--;
         }
         if (jumpTemp==0){
@@ -139,15 +161,15 @@ public class Player implements GameConfig, Assets {
     }
 
     public static float getPlayerX(){
-        return rechteck.getXPos();
+        return playerImage.getXPos();
     }
 
     public static void setX(float x){
-        rechteck.setXPos(x);
+        playerImage.setXPos(x);
     }
 
     public static void setY(float y){
-        rechteck.setYPos(y);
+        playerImage.setYPos(y);
     }
 
     public static int side=0;

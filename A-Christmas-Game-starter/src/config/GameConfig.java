@@ -4,8 +4,8 @@ import java.util.Random;
 
 public interface GameConfig {
 
-    public static final int SCREEN_WIDTH = 1000;
-    public static final int SCREEN_HEIGHT = 600;
+    public static final int SCREEN_WIDTH = 1400;
+    public static final int SCREEN_HEIGHT = 700;
     public static final int TARGET_FPS = 60;
     public static final int PLAYER_JUMP_HEIGHT = 125;
     public static final int PLAYER_JUMP_SPEED = 5;
